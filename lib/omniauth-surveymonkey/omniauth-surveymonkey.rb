@@ -1,2 +1,2 @@
 require 'omniauth-surveymonkey/version'
-require 'omniauth/strategies/github'
+require 'omniauth/strategies/surveymonkey'
