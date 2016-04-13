@@ -6,8 +6,6 @@ Gem::Specification.new do |s|
   s.email       = 'jordanm@surveymonkey.com'
   s.license     = 'MIT'
 
-  gem.require_paths = ['lib']
-
   gem.add_dependency 'omniauth', '~> 1.0'
   gem.add_dependency 'faraday'
   gem.add_dependency 'multi_json'
