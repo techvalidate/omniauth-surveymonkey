@@ -14,10 +14,10 @@ module OmniAuth
       end
 
       def callback_phase
-        connection = Faraday.new url: 'https://api.surveymonkey.net' do |faraday|
+        connection = ::Faraday.new url: 'https://api.surveymonkey.net' do |faraday|
           faraday.request  :url_encoded
           faraday.response :logger
-          faraday.adapter  Faraday.default_adapter
+          faraday.adapter  ::Faraday.default_adapter
         end
 
         form_fields = {
@@ -29,12 +29,12 @@ module OmniAuth
         }
 
         response = connection.post "/oauth/token?api_key=#{options.api_key}", form_fields
-        json = MultiJson.load response.body
+        json = ::MultiJson.load response.body
         options.access_token = json['access_token']
 
         connection.authorization :Bearer, options.access_token
         info = connection.get "/v3/users/me?api_key=#{options.api_key}"
-        json = MultiJson.load info.body
+        json = ::MultiJson.load info.body
 
         options.username        = json['username']
         options.first_name      = json['first_name']
