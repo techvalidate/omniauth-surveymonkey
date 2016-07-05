@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Jordan McKible']
   spec.email         = ['jordanm@surveymonkey.com']
 
-  spec.summary       = %q{OmniAuth strategy for the SurveyMonkey developer API}
+  spec.summary       = 'OmniAuth strategy for the SurveyMonkey developer API'
   spec.homepage      = 'https://developer.surveymonkey.com/'
   spec.license       = 'MIT'
 
@@ -29,7 +29,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'omniauth', '~> 1.0'
   spec.add_dependency 'faraday'
   spec.add_dependency 'multi_json'
-
 
   spec.add_development_dependency 'bundler', '~> 1.11'
   spec.add_development_dependency 'rake', '~> 10.0'
