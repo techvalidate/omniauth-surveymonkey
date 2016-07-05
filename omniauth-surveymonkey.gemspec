@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['jordanm@surveymonkey.com']
 
   spec.summary       = 'OmniAuth strategy for the SurveyMonkey developer API'
-  spec.homepage      = 'https://developer.surveymonkey.com/'
+  spec.homepage      = 'https://github.com/techvalidate/omniauth-surveymonkey'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
