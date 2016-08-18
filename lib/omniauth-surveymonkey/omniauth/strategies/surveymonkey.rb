@@ -32,17 +32,19 @@ module OmniAuth
         json = ::MultiJson.load response.body
         options.access_token = json['access_token']
 
-        connection.authorization :Bearer, options.access_token
-        info = connection.get "/v3/users/me?api_key=#{options.api_key}"
-        json = ::MultiJson.load info.body
+        if options.access_token
+          connection.authorization :Bearer, options.access_token
+          info = connection.get "/v3/users/me?api_key=#{options.api_key}"
+          json = ::MultiJson.load info.body
 
-        options.username        = json['username']
-        options.first_name      = json['first_name']
-        options.last_name       = json['last_name']
-        options.account_type    = json['account_type']
-        options.language        = json['language']
-        options.email           = json['email']
-        options.surveymonkey_id = json['id'].to_i
+          options.username        = json['username']
+          options.first_name      = json['first_name']
+          options.last_name       = json['last_name']
+          options.account_type    = json['account_type']
+          options.language        = json['language']
+          options.email           = json['email']
+          options.surveymonkey_id = json['id'].to_i
+        end
 
         super
       end
