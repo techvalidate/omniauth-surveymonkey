@@ -5,7 +5,9 @@ This is the official OmniAuth strategy for authenticating to SurveyMonkey's v3 A
 ## Basic Usage
 ```
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :surveymonkey, ENV['SURVEYMONKEY_CLIENT_ID'], ENV['SURVEYMONKEY_API_KEY'], ENV['SURVEYMONKEY_SECRET']
+  provider :surveymonkey, ENV['SURVEYMONKEY_CLIENT_ID'], ENV['SURVEYMONKEY_SECRET']
+  # If you have an older application that supplies an API_KEY it can still be used with this version of the gem
+  # provider :surveymonkey, ENV['SURVEYMONKEY_CLIENT_ID'], ENV['SURVEYMONKEY_SECRET'], api_key: ENV['SURVEYMONKEY_API_KEY']
 end
 ```
 
