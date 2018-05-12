@@ -6,10 +6,10 @@ module OmniAuth
 
       configure url: 'https://www.surveymonkey.com/oauth/authorize'
 
-      args [:client_id, :api_key, :client_secret]
+      args [:client_id, :client_secret]
 
       def request_phase
-        hash = { client_id: options.client_id, api_key: options.api_key, redirect_uri: callback_url, response_type: 'code' }
+        hash = { client_id: options.client_id, api_key: options.api_key, redirect_uri: callback_url, response_type: 'code' }.compact
         redirect "#{options.url}?#{hash.to_query}"
       end
 
@@ -28,8 +28,9 @@ module OmniAuth
              grant_type: 'authorization_code'
         }
 
-        response = connection.post "/oauth/token?api_key=#{options.api_key}", form_fields
+        response = connection.post "/oauth/token#{"?api_key=#{options.api_key}" if options.api_key}", form_fields
         json = ::MultiJson.load response.body
+
         options.access_token = json['access_token']
 
         if options.access_token
@@ -37,13 +38,14 @@ module OmniAuth
           info = connection.get "/v3/users/me?api_key=#{options.api_key}"
           json = ::MultiJson.load info.body
 
-          options.username        = json['username']
-          options.first_name      = json['first_name']
-          options.last_name       = json['last_name']
           options.account_type    = json['account_type']
-          options.language        = json['language']
           options.email           = json['email']
+          options.email_verified  = json['email_verified']
+          options.first_name      = json['first_name']
           options.surveymonkey_id = json['id'].to_i
+          options.language        = json['language']
+          options.last_name       = json['last_name']
+          options.username        = json['username']
         end
 
         super
@@ -56,11 +58,12 @@ module OmniAuth
       info do
         {
            account_type: options.account_type,
+                  email: options.email
+         email_verified: options.email_verified
              first_name: options.first_name,
               last_name: options.last_name,
                username: options.username,
                language: options.language,
-                  email: options.email
         }
       end
 
