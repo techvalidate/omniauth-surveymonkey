@@ -58,12 +58,12 @@ module OmniAuth
       info do
         {
            account_type: options.account_type,
-                  email: options.email
-         email_verified: options.email_verified
+                  email: options.email,
+         email_verified: options.email_verified,
              first_name: options.first_name,
               last_name: options.last_name,
                username: options.username,
-               language: options.language,
+               language: options.language
         }
       end
 
