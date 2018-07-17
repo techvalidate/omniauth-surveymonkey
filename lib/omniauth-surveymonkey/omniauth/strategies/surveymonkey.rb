@@ -35,7 +35,7 @@ module OmniAuth
 
         if options.access_token
           connection.authorization :Bearer, options.access_token
-          info = connection.get "/v3/users/me?api_key=#{options.api_key}"
+          info = connection.get "/v3/users/me#{"?api_key=#{options.api_key}" if options.api_key}"
           json = ::MultiJson.load info.body
 
           options.account_type    = json['account_type']
@@ -46,6 +46,7 @@ module OmniAuth
           options.language        = json['language']
           options.last_name       = json['last_name']
           options.username        = json['username']
+          options.scopes          = json['scopes']
         end
 
         super
@@ -57,13 +58,15 @@ module OmniAuth
 
       info do
         {
-           account_type: options.account_type,
-                  email: options.email,
-         email_verified: options.email_verified,
-             first_name: options.first_name,
-              last_name: options.last_name,
-               username: options.username,
-               language: options.language
+               account_type: options.account_type,
+           available_scopes: options.scopes['available'],
+                      email: options.email,
+             email_verified: options.email_verified,
+                 first_name: options.first_name,
+             granted_scopes: options.scopes['granted'],
+                  last_name: options.last_name,
+                   username: options.username,
+                   language: options.language
         }
       end
 
