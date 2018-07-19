@@ -59,11 +59,11 @@ module OmniAuth
       info do
         {
                account_type: options.account_type,
-           available_scopes: options.scopes['available'],
+           available_scopes: options.scopes&.available,
                       email: options.email,
              email_verified: options.email_verified,
                  first_name: options.first_name,
-             granted_scopes: options.scopes['granted'],
+             granted_scopes: options.scopes&.granted,
                   last_name: options.last_name,
                    username: options.username,
                    language: options.language
