@@ -39,6 +39,8 @@ module OmniAuth
           json = ::MultiJson.load info.body
 
           options.account_type    = json['account_type']
+          options.date_created    = json['date_created']
+          options.date_last_login = json['date_last_login']
           options.email           = json['email']
           options.email_verified  = json['email_verified']
           options.first_name      = json['first_name']
@@ -47,6 +49,7 @@ module OmniAuth
           options.last_name       = json['last_name']
           options.username        = json['username']
           options.scopes          = json['scopes']
+          options.sso_connections = json['sso_connections']
         end
 
         super
@@ -60,13 +63,16 @@ module OmniAuth
         {
                account_type: options.account_type,
            available_scopes: options.scopes&.available,
+               date_created: options.date_created,
+            date_last_login: options.date_last_login,
                       email: options.email,
              email_verified: options.email_verified,
                  first_name: options.first_name,
              granted_scopes: options.scopes&.granted,
                   last_name: options.last_name,
-                   username: options.username,
-                   language: options.language
+                   language: options.language,
+            sso_connections: options.sso_connections,
+                   username: options.username
         }
       end
 
